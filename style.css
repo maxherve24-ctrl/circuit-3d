@@ -84,3 +84,24 @@ button.big {
 .lb li span { float: right; opacity: .85; }
 .lb li.me { color: #ffd54a; }
 .lb .empty { list-style: none; margin-left: -28px; opacity: .6; text-align: center; }
+
+/* Réglages du menu */
+h3 { margin: 14px 0 6px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; opacity: .7; text-align: left; }
+.seg { display: flex; gap: 6px; }
+.seg button {
+  flex: 1; padding: 10px 6px; border-radius: 10px; border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
+}
+.seg button.sel { background: #d7192f; border-color: #ff5a36; }
+.seg.tracks { flex-direction: column; }
+.seg.tracks button { text-align: left; padding: 10px 12px; }
+.seg.tracks small { display: block; font-weight: 400; font-size: 12px; opacity: .75; margin-top: 2px; }
+#ai-options { margin-bottom: 4px; }
+#play { margin-top: 18px; }
+button.ghost {
+  width: 100%; margin-top: 10px; padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,.25);
+  background: transparent; color: #fff; font-size: 15px; cursor: pointer;
+}
+.results li i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; border: 1px solid rgba(255,255,255,.5); }
+#minimap { top: 120px; }
+#mute { top: 150px; }

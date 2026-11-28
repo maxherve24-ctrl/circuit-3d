@@ -16,6 +16,7 @@
   <!-- Interface pendant la course -->
   <div id="hud" class="hidden">
     <div class="panel tl">
+      <div id="pos-row">Position <b id="pos">1</b>/<span id="pos-total">1</span></div>
       <div>Tour <b id="lap">1</b>/<span id="laps">3</span></div>
       <div>Temps <b id="time">0:00.000</b></div>
       <div>Meilleur tour <b id="best">--</b></div>
@@ -47,10 +48,23 @@
   <div id="menu" class="overlay">
     <div class="card">
       <h1>CIRCUIT 3D</h1>
-      <p class="sub">3 tours chronométrés. Le meilleur temps total entre au classement.</p>
+      <p class="sub">3 tours chronométrés.</p>
+
+      <h3>Circuit</h3>
+      <div id="opt-track" class="seg tracks"></div>
+
+      <h3>Adversaires</h3>
+      <div id="opt-opp" class="seg"></div>
+      <div id="ai-options">
+        <h3>Difficulté de l’IA</h3>
+        <div id="opt-diff" class="seg"></div>
+        <h3>Nombre d’adversaires</h3>
+        <div id="opt-count" class="seg"></div>
+      </div>
+
       <button id="play" class="big">JOUER</button>
       <p class="help">Clavier : flèches ou ZQSD · Espace = frein à main · R = replacer la voiture</p>
-      <h2>Classement <small id="lbmode"></small></h2>
+      <h2>Classement · <span id="lb-title"></span> <small id="lbmode"></small></h2>
       <ol id="lb-menu" class="lb"></ol>
     </div>
   </div>
@@ -58,15 +72,21 @@
   <!-- Fin de course -->
   <div id="end" class="overlay hidden">
     <div class="card">
-      <h1>ARRIVÉE</h1>
+      <h1 id="end-title">ARRIVÉE</h1>
       <div class="result">Temps total <b id="total"></b></div>
       <div class="result">Meilleur tour <b id="bestlap"></b></div>
+      <div id="results-box">
+        <h2>Résultats de la course</h2>
+        <ol id="results" class="lb results"></ol>
+      </div>
       <form id="save">
         <input id="name" maxlength="16" placeholder="Ton pseudo" autocomplete="off" required>
         <button type="submit">Enregistrer</button>
       </form>
+      <h2>Classement · <span id="lb-end-title"></span></h2>
       <ol id="lb-end" class="lb"></ol>
       <button id="again" class="big">REJOUER</button>
+      <button id="to-menu" class="ghost">Changer de circuit / réglages</button>
     </div>
   </div>
 

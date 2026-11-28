@@ -1,8 +1,8 @@
 // Classement : Firebase Firestore si configuré, sinon sauvegarde locale.
+// Chaque circuit a sa propre collection (ex : "scores", "scores_ovale"…).
 import { firebaseConfig } from './firebase-config.js';
 
 const FB = 'https://www.gstatic.com/firebasejs/11.0.2/';
-const LOCAL_KEY = 'circuit3d_scores';
 let db = null;
 let fs = null;
 
@@ -27,27 +27,28 @@ export async function initLeaderboard() {
 
 export const isOnline = () => db !== null;
 
-function readLocal() {
-  try { return JSON.parse(localStorage.getItem(LOCAL_KEY)) || []; } catch { return []; }
+const localKey = col => 'circuit3d_' + col;
+function readLocal(col) {
+  try { return JSON.parse(localStorage.getItem(localKey(col))) || []; } catch { return []; }
 }
 
-export async function submitTime(name, time, bestLap) {
+export async function submitTime(col, name, time, bestLap) {
   const entry = { name: String(name).trim().slice(0, 16), time: Math.round(time), bestLap: Math.round(bestLap) };
   if (db) {
-    await fs.addDoc(fs.collection(db, 'scores'), { ...entry, createdAt: fs.serverTimestamp() });
+    await fs.addDoc(fs.collection(db, col), { ...entry, createdAt: fs.serverTimestamp() });
   } else {
-    const all = readLocal();
+    const all = readLocal(col);
     all.push(entry);
     all.sort((a, b) => a.time - b.time);
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(all.slice(0, 50)));
+    localStorage.setItem(localKey(col), JSON.stringify(all.slice(0, 50)));
   }
 }
 
-export async function fetchTop(n = 10) {
+export async function fetchTop(col, n = 10) {
   if (db) {
-    const q = fs.query(fs.collection(db, 'scores'), fs.orderBy('time'), fs.limit(n));
+    const q = fs.query(fs.collection(db, col), fs.orderBy('time'), fs.limit(n));
     const snap = await fs.getDocs(q);
     return snap.docs.map(d => d.data());
   }
-  return readLocal().slice(0, n);
+  return readLocal(col).slice(0, n);
 }

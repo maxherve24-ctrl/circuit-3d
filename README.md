@@ -1,6 +1,9 @@
 # 🏎️ Circuit 3D
 
 Un jeu de course de voitures en 3D qui tourne dans le navigateur, sur PC comme sur téléphone.
+- **3 circuits** : Circuit Vert, Speedway (ovale au coucher du soleil), Canyon Désert
+- **Adversaires IA** au choix (oui/non, de 1 à 5), avec 3 niveaux : Facile, Moyen, Difficile
+- Un **classement séparé pour chaque circuit**
 - **Three.js** pour la 3D (lumière du soleil, ombres, ciel, arbres, tribune)
 - Une **physique maison** : accélération, freinage, adhérence, dérapage au frein à main, perte de vitesse dans l'herbe
 - **Firebase Firestore** pour le classement en ligne
@@ -12,7 +15,8 @@ Un jeu de course de voitures en 3D qui tourne dans le navigateur, sur PC comme s
 |---|---|
 | `index.html` | La page du jeu (menus, interface) |
 | `style.css` | Le style |
-| `main.js` | Le jeu : circuit, voiture, physique, caméra, son |
+| `main.js` | La 3D, le menu, la caméra, le son |
+| `core.js` | Les circuits, la physique des voitures et l'IA des adversaires |
 | `leaderboard.js` | Le classement (Firebase, ou local si Firebase n'est pas configuré) |
 | `firebase-config.js` | **À remplir** avec les infos de ton projet Firebase |
 | `firestore.rules` | Les règles de sécurité de la base de données |
@@ -52,8 +56,8 @@ Il n'y a rien à installer : pas de npm et pas de compilation.
 - **Téléphone** : ◀ ▶ à gauche, **GAZ / FREIN / DRIFT** à droite
 
 ## Personnaliser
-Tout en haut de `main.js` :
+Tout en haut de `core.js` :
 - `LAPS` : le nombre de tours
 - `CAR` : la vitesse max, l'accélération, l'adhérence…
-- `TRACK_POINTS` : le tracé du circuit (ajoute ou déplace des points pour inventer ton propre circuit)
-- La couleur de la voiture se change dans `buildCar(0xc8102e)` (code couleur hexadécimal)
+- `DIFFICULTIES` : la vitesse de l'IA à chaque niveau
+- `TRACKS` : les circuits. Pour en créer un, copie un bloc et change ses points. Pense aussi à ajouter sa collection dans `firestore.rules`.
